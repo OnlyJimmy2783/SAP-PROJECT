@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../assest/style.css">
+</head>
+<body>
+<div class="dashboard">
+ <aside class="sidebar" id="mySidebar">
+  <div class="sidebar-header">
+    <span>Main Menu</span>
+    <span class="toggle-btn" style="cursor:pointer" onclick="toggleSidebar()">◀</span>
+  </div>
+
+  <div class="sidebar-tabs">
+    <div class="tab active">Modules</div>
+   <!-- <div class="tab">Drag & Relate</div>
+    <div class="tab">My Menu</div>
+  -->
+  </div>
+
+  <ul class="module-list">
+    <!--
+    <li class="module-item" onclick="navigate('index.html')">
+      <span class="module-icon">⚙️</span><span>Administration</span>
+    </li>
+    <li class="module-item">
+      <span class="module-icon">💎</span><span>Financials</span>
+    </li>
+    <li class="module-item">
+      <span class="module-icon">🤝</span><span>CRM</span>
+    </li>
+    <li class="module-item">
+      <span class="module-icon">📈</span><span>Sales-A/R</span>
+    </li>
+    <li class="module-item">
+      <span class="module-icon">🛒</span><span>Purchasing-A/P</span>
+    </li>
+    <li class="module-item">
+      <span class="module-icon">🏢</span><span>Business Partners</span>
+    </li>
+    <li class="module-item">
+      <span class="module-icon">🏦</span><span>Banking</span>
+    </li>
+-->
+    <li class="module-item" onclick="toggleSubMenu('inventoryMenu')">
+      <span class="module-icon">📦</span><span>Inventory</span>
+    </li>
+  
+    <ul class="sub-module-list" id="inventoryMenu">
+      <li onclick="navigate('item-master.html')">Item Master Data</li>
+      <li onclick="navigate('bar-codes.html')">Bar Codes</li>
+      <li onclick="navigate('packing-slip.html')">Packing Slip</li> 
+      <li onclick="navigate('doc-printing.html')">Document Printing</li>
+      <li onclick="navigate('item-mgmt.html')">Item Management</li>
+      <li onclick="navigate('inv-transactions.html')">Inventory Transactions</li>
+      <li onclick="navigate('price-lists.html')">Price Lists</li>
+      <li onclick="navigate('pick-pack.html')">Pick and Pack</li>
+      <li onclick="navigate('warehouse.html')">Warehouse</li> 
+      <li onclick="navigate('inv-reports.html')">Inventory Reports</li>
+    </ul>
+<!--
+    <li class="module-item">
+      <span class="module-icon">🛠️</span><span>Resources</span>
+    </li>
+--> 
+    <li class="module-item" onclick="toggleSubMenu('prodMenu')">
+      <span class="module-icon">🏭</span><span>Production</span>
+    </li>
+      
+    <ul class="sub-module-list" id="prodMenu">
+      <li onclick="navigate('bom.html')">Bill Of Materials</li>
+      <li onclick="navigate('prod-order.html')">Production Order</li>
+      <li onclick="navigate('procurement.html')">Procurement Confirmation Wizard</li>
+      <li onclick="navigate('receipt-prod.html')">Receipt from Production</li>
+      <li onclick="navigate('issue-prod.html')">Issue for Production</li>
+      <li onclick="navigate('update-prices.html')">Update Parent Item Prices Globally</li>
+      <li onclick="navigate('bom-mgmt.html')">Bill Of Materials Management</li>
+      <li onclick="navigate('cost-mgmt.html')">Production Std Cost Management</li>
+      <li onclick="navigate('prod-reports.html')">Production Reports</li>
+    </ul>
+<!--
+    <li class="module-item">
+      <span class="module-icon">🔧</span><span>Service</span>
+    </li>
+    <li class="module-item" onclick="navigate('add-user.html')">
+      <span class="module-icon">👨‍💼</span><span>Human Resources</span>
+    </li>
+    <li class="module-item">
+      <span class="module-icon">📅</span><span>Project Management</span>
+    </li>
+    <li class="module-item">
+      <span class="module-icon">📊</span><span>Reports</span>
+    </li>
+  -->    
+    <li class="module-item" onclick="logout()" style="color:red; border-top:1px solid #ddd; margin-top:10px;">
+      <span class="module-icon">🚪</span><span>Logout</span>
+    </li>
+  </ul>
+</aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="nav-info">Home / Dashboard</div>
+      <div class="user-info" id="userDisplay">User: Admin</div>
+    </header>
+    <div class="content">
+      <div class="form-card">
+        <div class="form-title">Welcome to ERP Dashboard</div>
+        <p>Select an option from the left menu to begin.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="../js/app.js"></script>
+</body>
+</html>

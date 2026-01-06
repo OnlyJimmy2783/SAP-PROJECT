@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ERP System - Login</title>
+  <link rel="stylesheet" href="../assest/style.css">
+</head>
+<body class="login-body" style="background: #d4d0c8; display: flex; justify-content: center; align-items: center; height: 100vh;">
+  
+  <div class="login-box" style="background: white; padding: 40px; border: 2px solid #808080; box-shadow: 5px 5px 15px rgba(0,0,0,0.2); width: 350px;">
+    <h2 style="text-align: center; color: #3e4d6a; margin-top: 0;">ERP System Login</h2>
+    
+    <div style="margin-bottom: 15px;">
+      <label style="font-size: 0.8rem; font-weight: bold; display: block; margin-bottom: 5px;">Username</label>
+      <input id="username" placeholder="Enter Username" style="width: 100%; padding: 8px; border: 1px solid #808080; box-sizing: border-box;">
+    </div>
+    
+    <div style="margin-bottom: 20px;">
+      <label style="font-size: 0.8rem; font-weight: bold; display: block; margin-bottom: 5px;">Password</label>
+      <input id="password" type="password" placeholder="Enter Password" style="width: 100%; padding: 8px; border: 1px solid #808080; box-sizing: border-box;">
+    </div>
+    
+    <button onclick="login()" style="width: 100%; padding: 10px; background: linear-gradient(to right, #7b869b, #3e4d6a); color: white; border: none; cursor: pointer; font-weight: bold;">Login</button>
+    
+    <p class="hint" style="font-size: 0.75rem; color: #666; text-align: center; margin-top: 15px;">
+      Username: admin | Password: 1234
+    </p>
+  </div>
+
+  <script src="../js/app.js"></script>
+</body>
+</html>
