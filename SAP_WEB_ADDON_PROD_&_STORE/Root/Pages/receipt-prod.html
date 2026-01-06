@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ERP - Production Order</title>
+  <title>ERP - Receipt from Production</title>
   <link rel="stylesheet" href="../assest/style.css"> 
 </head>
 <body>
@@ -14,12 +14,9 @@
 
     <div class="sidebar-tabs">
       <div class="tab active">Modules</div>
-      <!--<div class="tab">Drag & Relate</div>
-      <div class="tab">My Menu</div>
-    -->
     </div>
 
-      
+    <ul class="module-list">
       <li class="module-item" onclick="toggleSubMenu('inventoryMenu')">
         <span class="module-icon">📦</span><span>Inventory</span>
       </li>
@@ -32,13 +29,11 @@
         <span class="module-icon">🏭</span><span>Production</span>
       </li>
       <ul class="sub-module-list open" id="prodMenu">
-        <li onclick="navigate('prod-order.html')" style="background: #f0f7ff; color: #3a7bd5; font-weight: bold;">Production Order</li>
+        <li onclick="navigate('prod-order.html')">Production Order</li>
+        <li onclick="navigate('receipt-prod.html')" style="background: #f0f7ff; color: #3a7bd5; font-weight: bold;">Receipt from Production</li>
         <li onclick="navigate('bom.html')">Bill Of Materials</li>
-        <li onclick="navigate('receipt-prod.html')">Receipt from Production</li>
-        <li onclick="navigate('prod-reports.html')">Receipt from Production</li>
       </ul>
 
-      
       <li class="module-item" onclick="logout()" style="background:#d9534f; border:none; margin-top:20px;">
         <span class="module-icon">🚪</span><span>Logout</span>
       </li>
@@ -47,67 +42,54 @@
 
   <div class="main">
     <header class="topbar">
-      <div class="nav-info">Home / Production Order</div>
+      <div class="nav-info">Home / Receipt from Production</div>
       <div class="user-info" id="userDisplay">User: Admin</div>
     </header>
     
     <div class="content">
-      <div class="form-card" style="border: 1px solid #3a7bd5;">
-        <div class="form-title">Production Order</div>
+      <div class="form-card" style="border: 1px solid #28a745;"> <div class="form-title">Receipt from Production</div>
         
         <div class="form-grid">
           <div class="form-group">
-            <label>Production No.</label>
-            <input type="text" placeholder="Auto-generated">
+            <label>Production Order No.</label>
+            <input type="text" placeholder="Select Order No.">
+          </div>
+          <div class="form-group">
+            <label>Posting Date</label>
+            <input type="date">
           </div>
           <div class="form-group">
             <label>Warehouse</label>
             <select style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <option>Finished Goods Whse</option>
                 <option>Main Warehouse</option>
-                <option>Raw Materials</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Document Number</label>
-            <input type="text" placeholder="Ref No.">
-          </div>
-          <div class="form-group">
-            <label>Order Date</label>
-            <input type="date">
-          </div>
-          <div class="form-group">
-            <label>Start Date</label>
-            <input type="date">
-          </div>
-          <div class="form-group">
-            <label>Due Date</label>
-            <input type="date">
-          </div>
-          <div class="form-group" style="grid-column: span 2;">
-            <label>Product Description</label>
-            <input type="text" placeholder="Search Finished Good...">
+            <label>Reference No.</label>
+            <input type="text" placeholder="GRN Number">
           </div>
         </div>
       </div>
 
       <div class="form-card" style="margin-top: 20px;">
-        <div class="form-title" style="font-size: 1.1rem;">Component Details</div>
+        <div class="form-title" style="font-size: 1.1rem;">Finished Goods Received</div>
         <div style="border: 1px solid #eee; border-radius: 4px; overflow: hidden;">
            <table style="width: 100%; text-align: left; border-collapse: collapse;">
              <tr style="background: #f8f9fa; border-bottom: 2px solid #ddd;">
                <th style="padding: 12px;">Sr.</th>
-               <th style="padding: 12px;">Item Number</th>
+               <th style="padding: 12px;">Item Code</th>
                <th style="padding: 12px;">Item Name</th>
-               <th style="padding: 12px;">Quantity</th>
-               <th style="padding: 12px;">Units</th>
+               <th style="padding: 12px;">Received Quantity</th>
+               <th style="padding: 12px;">Batch / Serial No.</th>
                <th style="padding: 12px; text-align: center;">Action</th>
              </tr>
              <tr style="border-bottom: 1px solid #eee;">
                <td style="padding: 12px;">1</td>
                <td style="padding: 12px;"><input type="text" placeholder="Item Code" style="width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></td>
-               <td style="padding: 12px;"><input type="text" placeholder="Item Name" style="width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></td>
+               <td style="padding: 12px;"><input type="text" placeholder="Finished Good Name" style="width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></td>
                <td style="padding: 12px;"><input type="number" placeholder="0" style="width: 80px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></td>
-               <td style="padding: 12px;"><input type="text" placeholder="Pcs/Mtr" style="width: 60px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></td>
+               <td style="padding: 12px;"><input type="text" placeholder="B-2024-001" style="width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></td>
                <td style="padding: 12px; text-align: center;">
                  <button style="background: #d9534f; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">X</button>
                </td>
@@ -116,14 +98,13 @@
         </div>
 
         <div class="btn-group">
-          <button class="btn-add">Add Component</button>
-          <button class="btn-save">Save Order</button>
+          <button class="btn-add" style="background: #6c757d;">Add Row</button>
+          <button class="btn-save" style="background: #28a745;">Post Receipt</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 
 <script src="../js/app.js"></script>
 </body>
