@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ERP - Inventory Bin Master</title>
+  <link rel="stylesheet" href="../assest/style.css"> 
+</head>
+<body>
+<div class="dashboard">
+  <aside class="sidebar" id="mySidebar">
+    <div class="sidebar-header">
+      <span>ERP Menu</span>
+      <span class="toggle-btn" style="cursor:pointer" onclick="toggleSidebar()">◀</span>
+    </div>
+
+    <div class="sidebar-tabs">
+      <div class="tab active">Modules</div>
+    </div>
+
+    <li class="module-item" onclick="toggleSubMenu('inventoryMenu')">
+      <span class="module-icon">📦</span><span>Inventory</span>
+    </li>
+    <ul class="sub-module-list open" id="inventoryMenu">
+      <li onclick="navigate('item-master.html')">Item Master Data</li>
+      <li onclick="navigate('bin-master.html')" style="background: #f0f7ff; color: #3a7bd5; font-weight: bold;">Bin Master Data</li>
+      <li onclick="navigate('packing-slip.html')">Packing Slip</li>
+    </ul>
+
+    <li class="module-item" onclick="toggleSubMenu('prodMenu')">
+      <span class="module-icon">🏭</span><span>Production</span>
+    </li>
+    <ul class="sub-module-list" id="prodMenu">
+      <li onclick="navigate('prod-order.html')">Production Order</li>
+      <li onclick="navigate('bom.html')">Bill Of Materials</li>
+    </ul>
+
+    <li class="module-item" onclick="logout()" style="background:#d9534f; border:none; margin-top:20px;">
+      <span class="module-icon">🚪</span><span>Logout</span>
+    </li>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="nav-info">Home / Inventory / Bin Master Data</div>
+      <div class="user-info" id="userDisplay">User: Admin</div>
+    </header>
+    
+    <div class="content">
+      <div class="form-card" style="border: 1px solid #28a745;"> <div class="form-title">Bin Master Data</div>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Warehouse Code</label>
+            <select style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <option value="">Select Warehouse</option>
+                <option>WH-001 (Main)</option>
+                <option>WH-002 (Finished Goods)</option>
+                <option>WH-003 (Raw Materials)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Bin Code</label>
+            <input type="text" placeholder="e.g., ZONE1-RACK2-BIN3">
+          </div>
+
+          <div class="form-group">
+            <label>Bin Type</label>
+            <select style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <option>Receiving</option>
+                <option>Storage</option>
+                <option>Picking</option>
+                <option>Shipping</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Status</label>
+            <select style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <option style="color: green;">Active</option>
+                <option style="color: orange;">Full</option>
+                <option style="color: red;">Inactive/Locked</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="grid-column: span 2;">
+            <label>Bin Description</label>
+            <input type="text" placeholder="Enter detailed location or purpose...">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card" style="margin-top: 20px; border: none; box-shadow: none; background: transparent;">
+        <div class="btn-group" style="justify-content: flex-end;">
+          <button class="btn-save" style="background: #28a745; width: 200px;">Save Bin Configuration</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ERP - Barcode Management</title>
+  <link rel="stylesheet" href="../assest/style.css"> 
+</head>
+<body>
+<div class="dashboard">
+  <aside class="sidebar" id="mySidebar">
+    <div class="sidebar-header">
+      <span>ERP Menu</span>
+      <span class="toggle-btn" style="cursor:pointer" onclick="toggleSidebar()">◀</span>
+    </div>
+
+    <div class="sidebar-tabs">
+      <div class="tab active">Modules</div>
+    </div>
+
+    <ul class="module-list">
+      <li class="module-item" onclick="toggleSubMenu('inventoryMenu')">
+        <span class="module-icon">📦</span><span>Inventory</span>
+      </li>
+      <ul class="sub-module-list open" id="inventoryMenu">
+        <li onclick="navigate('item-master.html')">Item Master Data</li>
+        <li onclick="navigate('barcode.html')" style="background: #f0f7ff; color: #3a7bd5; font-weight: bold;">Barcode Setup</li>  
+      </ul>
+
+      <li class="module-item" onclick="logout()" style="background:#d9534f; border:none; margin-top:20px;">
+        <span class="module-icon">🚪</span><span>Logout</span>
+      </li>
+    </ul>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="nav-info">Home / Inventory / Barcode Management</div>
+      <div class="user-info" id="userDisplay">User: Admin</div>
+    </header>
+    
+    <div class="content">
+      <div class="form-card" style="border: 1px solid #3a7bd5;">
+        <div class="form-title">Register New Barcode</div>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Item Code</label>
+            <input type="text" placeholder="Enter Item Code (e.g. FG-001)">
+          </div>
+          <div class="form-group">
+            <label>Barcode Number</label>
+            <input type="text" placeholder="Scan or Enter Barcode">
+          </div>
+          <div class="form-group">
+            <label>UoM (Unit of Measure)</label>
+            <select style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <option>Pcs</option>
+                <option>Meters</option>
+                <option>Kgs</option>
+                <option>Box</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Print Quantity</label>
+            <input type="number" value="1">
+          </div>
+          <div class="form-group" style="grid-column: span 2;">
+            <label>Description</label>
+            <input type="text" placeholder="Item details or specifications...">
+          </div>
+        </div>
+        
+        <div class="btn-group" style="margin-top: 15px; justify-content: flex-end;">
+            <button class="btn-save" style="width: 150px;">Generate Barcode</button>
+        </div>
+      </div>
+
+      <div class="form-card" style="margin-top: 20px;">
+        <div class="form-title" style="font-size: 1.1rem;">Associated Barcodes</div>
+        <div style="border: 1px solid #eee; border-radius: 4px; overflow: hidden;">
+           <table style="width: 100%; text-align: left; border-collapse: collapse;">
+             <tr style="background: #f8f9fa; border-bottom: 2px solid #ddd;">
+               <th style="padding: 12px;">Sr.</th>
+               <th style="padding: 12px;">Item Code</th>
+               <th style="padding: 12px;">Barcode</th>
+               <th style="padding: 12px;">UoM</th>
+               <th style="padding: 12px;">Description</th>
+               <th style="padding: 12px; text-align: center;">Action</th>
+             </tr>
+             <tr style="border-bottom: 1px solid #eee;">
+               <td style="padding: 12px;">1</td>
+               <td style="padding: 12px;"><strong>ITM-2024</strong></td>
+               <td style="padding: 12px; font-family: monospace; color: #3a7bd5;">890123456789</td>
+               <td style="padding: 12px;">Pcs</td>
+               <td style="padding: 12px;">Finished Cotton Fabric - Blue</td>
+               <td style="padding: 12px; text-align: center;">
+                 <button style="background: #3a7bd5; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; margin-right: 5px;">Print</button>
+                 <button style="background: #d9534f; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">X</button>
+               </td>
+             </tr>
+           </table>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn-add">Add Row</button>
+          <button class="btn-save">Save All</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ERP - Production STD Cost Management</title>
+  <link rel="stylesheet" href="../assest/style.css"> 
+</head>
+<body>
+<div class="dashboard">
+  <aside class="sidebar" id="mySidebar">
+    <div class="sidebar-header">
+      <span>ERP Menu</span>
+      <span class="toggle-btn" style="cursor:pointer" onclick="toggleSidebar()">◀</span>
+    </div>
+
+    <div class="sidebar-tabs">
+      <div class="tab active">Modules</div>
+    </div>
+
+    <ul class="module-list">
+      <li class="module-item" onclick="toggleSubMenu('inventoryMenu')">
+        <span class="module-icon">📦</span><span>Inventory</span>
+      </li>
+      <ul class="sub-module-list" id="inventoryMenu">
+        <li onclick="navigate('item-master.html')">Item Master Data</li>
+        <li onclick="navigate('packing-slip.html')">Packing Slip</li>
+      </ul>
+
+      <li class="module-item" onclick="toggleSubMenu('prodMenu')">
+        <span class="module-icon">🏭</span><span>Production</span>
+      </li>
+      <ul class="sub-module-list open" id="prodMenu">
+        <li onclick="navigate('prod-order.html')">Production Order</li>
+        <li onclick="navigate('bom.html')">Bill Of Materials</li>
+        <li onclick="navigate('std-cost.html')" style="background: #f0f7ff; color: #3a7bd5; font-weight: bold;">STD Cost Management</li>
+      </ul>
+
+      <li class="module-item" onclick="logout()" style="background:#d9534f; border:none; margin-top:20px;">
+        <span class="module-icon">🚪</span><span>Logout</span>
+      </li>
+    </ul>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="nav-info">Home / Production STD Cost Management</div>
+      <div class="user-info" id="userDisplay">User: Admin</div>
+    </header>
+    
+    <div class="content">
+      <div class="form-card" style="border: 1px solid #3a7bd5;">
+        <div class="form-title">Cost Management Header</div>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Price List</label>
+            <select style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <option>Base Price List</option>
+                <option>Standard Production Cost</option>
+                <option>Wholesale Price List</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Effective Date</label>
+            <input type="date">
+          </div>
+          <div class="form-group" style="grid-column: span 2;">
+            <label>Remarks</label>
+            <input type="text" placeholder="Reason for cost update (e.g., Annual Review)">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card" style="margin-top: 20px;">
+        <div class="form-title" style="font-size: 1.1rem;">Item Cost Details</div>
+        <div style="border: 1px solid #eee; border-radius: 4px; overflow: hidden;">
+           <table style="width: 100%; text-align: left; border-collapse: collapse;">
+             <tr style="background: #f8f9fa; border-bottom: 2px solid #ddd;">
+               <th style="padding: 12px;">Sr.</th>
+               <th style="padding: 12px;">Item Code</th>
+               <th style="padding: 12px;">Current Std Cost</th>
+               <th style="padding: 12px;">Updated Std Cost</th>
+               <th style="padding: 12px; text-align: center;">Action</th>
+             </tr>
+             <tr style="border-bottom: 1px solid #eee;">
+               <td style="padding: 12px;">1</td>
+               <td style="padding: 12px;">
+                 <input type="text" placeholder="Item Code" style="width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+               </td>
+               <td style="padding: 12px;">
+                 <input type="number" value="0.00" readonly style="width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background: #f9f9f9;">
+               </td>
+               <td style="padding: 12px;">
+                 <input type="number" placeholder="Enter New Cost" style="width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+               </td>
+               <td style="padding: 12px; text-align: center;">
+                 <button style="background: #d9534f; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">X</button>
+               </td>
+             </tr>
+           </table>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn-add">Add Row</button>
+          <button class="btn-save">Update Costs</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/app.js"></script>
+<script>
+  // Simple sidebar logic for navigation
+  function toggleSubMenu(menuId) {
+    const menu = document.getElementById(menuId);
+    menu.classList.toggle('open');
+  }
+  function navigate(page) { window.location.href = page; }
+  function logout() { if(confirm("Are you sure you want to logout?")) window.location.href = 'index.html'; }
+</script>
+</body>
+</html>

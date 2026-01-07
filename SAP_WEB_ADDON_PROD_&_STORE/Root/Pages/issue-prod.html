@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ERP - Issue for Production</title>
+  <link rel="stylesheet" href="../assest/style.css">
+</head>
+<body>
+<div class="dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="mySidebar">
+    <div class="sidebar-header">
+      <span>ERP Menu</span>
+      <span class="toggle-btn" style="cursor:pointer" onclick="toggleSidebar()">◀</span>
+    </div>
+
+    <div class="sidebar-tabs">
+      <div class="tab active">Modules</div>
+    </div>
+
+    <li class="module-item" onclick="toggleSubMenu('inventoryMenu')">
+      <span class="module-icon">📦</span><span>Inventory</span>
+    </li>
+    <ul class="sub-module-list" id="inventoryMenu">
+      <li onclick="navigate('item-master.html')">Item Master Data</li>
+      <li onclick="navigate('packing-slip.html')">Packing Slip</li>
+    </ul>`
+
+    <li class="module-item" onclick="toggleSubMenu('prodMenu')">
+      <span class="module-icon">🏭</span><span>Production</span>
+    </li>
+    <ul class="sub-module-list open" id="prodMenu">
+      <li onclick="navigate('prod-order.html')">Production Order</li>
+      <li onclick="navigate('issue-production.html')" style="background:#f0f7ff;color:#3a7bd5;font-weight:bold;">
+        Issue for Production
+      </li>
+      <li onclick="navigate('bom.html')">Bill Of Materials</li>
+    </ul>
+
+    <li class="module-item" onclick="logout()" style="background:#d9534f;margin-top:20px;">
+      <span class="module-icon">🚪</span><span>Logout</span>
+    </li>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <header class="topbar">
+      <div class="nav-info">Home / Issue for Production</div>
+      <div class="user-info">User: Admin</div>
+    </header>
+
+    <div class="content">
+
+      <!-- Header Form -->
+      <div class="form-card" style="border:1px solid #3a7bd5;">
+        <div class="form-title">Issue for Production</div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Production Order No.</label>
+            <input type="text" placeholder="Select Production Order">
+          </div>
+
+          <div class="form-group">
+            <label>Warehouse</label>
+            <select>
+              <option>Main Warehouse</option>
+              <option>Raw Materials</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Posting Date</label>
+            <input type="date">
+          </div>
+
+          <div class="form-group">
+            <label>Issue Method</label>
+            <select>
+              <option>Manual</option>
+              <option>Backflush</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Component Issue Table -->
+      <div class="form-card" style="margin-top:20px;">
+        <div class="form-title" style="font-size:1.1rem;">Component Issue Details</div>
+
+        <div style="border:1px solid #eee;border-radius:4px;overflow:hidden;">
+          <table style="width:100%;border-collapse:collapse;">
+            <tr style="background:#f8f9fa;border-bottom:2px solid #ddd;">
+              <th style="padding:12px;">Sr.</th>
+              <th style="padding:12px;">Component Item Code</th>
+              <th style="padding:12px;">Item Name</th>
+              <th style="padding:12px;">Issued Quantity</th>
+              <th style="padding:12px;">Unit</th>
+              <th style="padding:12px;text-align:center;">Action</th>
+            </tr>
+
+            <tr style="border-bottom:1px solid #eee;">
+              <td style="padding:12px;">1</td>
+              <td style="padding:12px;">
+                <input type="text" placeholder="Item Code" style="width:90%;">
+              </td>
+              <td style="padding:12px;">
+                <input type="text" placeholder="Item Name" style="width:90%;">
+              </td>
+              <td style="padding:12px;">
+                <input type="number" placeholder="0" style="width:80px;">
+              </td>
+              <td style="padding:12px;">
+                <input type="text" placeholder="Pcs/Kg">
+              </td>
+              <td style="padding:12px;text-align:center;">
+                <button style="background:#d9534f;color:#fff;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;">
+                  X
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn-add">Add Item</button>
+          <button class="btn-save">Post Issue</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../js/app.js"></script>
+</body>
+</html>

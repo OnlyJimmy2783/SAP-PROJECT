@@ -1,5 +1,5 @@
 /*********************************
- * AUTHENTICATION & USER HANDLING
+ * AUTHENTICATION & ACCESS CONTROL
  *********************************/
 
 // Login Function
@@ -43,10 +43,8 @@ function registerUser() {
 
     users.push({ u: u, p: p });
     localStorage.setItem("users", JSON.stringify(users));
-
     alert("User " + u + " registered successfully!");
     
-    // Clear fields if they exist
     if(document.getElementById("newUsername")) document.getElementById("newUsername").value = "";
     if(document.getElementById("newPassword")) document.getElementById("newPassword").value = "";
 }
@@ -67,13 +65,18 @@ function logout() {
 function toggleSidebar() {
     const sidebar = document.getElementById("mySidebar");
     const btn = document.querySelector(".toggle-btn");
+    const mainContent = document.querySelector(".main");
 
     sidebar.classList.toggle("collapsed");
 
     if (sidebar.classList.contains("collapsed")) {
+        sidebar.style.width = "60px";
+        if(mainContent) mainContent.style.marginLeft = "60px";
         btn.innerHTML = "▶";
         closeAllSubMenus();
     } else {
+        sidebar.style.width = "250px";
+        if(mainContent) mainContent.style.marginLeft = "250px";
         btn.innerHTML = "◀";
     }
 }
@@ -105,18 +108,38 @@ function navigate(page) {
 }
 
 /*********************************
- * PRODUCTION LOGIC (RECEIPT & REPORTS)
+ * TABLE UTILITIES (ADD/REMOVE)
  *********************************/
 
-// Add Row for Receipt from Production
+function updateSerialNumbers() {
+    const rows = document.querySelectorAll("table tr");
+    // Start from index 1 to skip header
+    for (let i = 1; i < rows.length; i++) {
+        if(rows[i].cells[0]) rows[i].cells[0].innerText = i;
+    }
+}
+
+function removeRow(btn) {
+    const row = btn.closest('tr');
+    const table = row.closest('table');
+    if (table.rows.length > 2) { 
+        row.remove();
+        updateSerialNumbers();
+    } else {
+        alert("At least one row is required.");
+    }
+}
+
+/*********************************
+ * MODULE SPECIFIC LOGIC
+ *********************************/
+
+// 1. Receipt from Production
 function addReceiptRow() {
     const table = document.querySelector("table");
-    if (!table) return;
-    
     const rowCount = table.rows.length;
     const row = table.insertRow(-1);
     row.style.borderBottom = "1px solid #eee";
-
     row.innerHTML = `
         <td style="padding: 12px;">${rowCount}</td>
         <td style="padding: 12px;"><input type="text" placeholder="Item Code" style="width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></td>
@@ -125,63 +148,57 @@ function addReceiptRow() {
         <td style="padding: 12px;"><input type="text" placeholder="Batch No." style="width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></td>
         <td style="padding: 12px; text-align: center;">
             <button onclick="removeRow(this)" style="background: #d9534f; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">X</button>
-        </td>
-    `;
+        </td>`;
 }
 
-// Remove Row Logic
-function removeRow(btn) {
-    const row = btn.parentNode.parentNode;
+// 2. Barcode Management
+function addBarcodeRow() {
     const table = document.querySelector("table");
-    if (table.rows.length > 2) { // Keep header + at least one data row
-        row.parentNode.removeChild(row);
-        updateSerialNumbers();
-    } else {
-        alert("At least one row is required.");
-    }
+    const rowCount = table.rows.length;
+    const row = table.insertRow(-1);
+    row.style.borderBottom = "1px solid #eee";
+    row.innerHTML = `
+        <td style="padding: 12px;">${rowCount}</td>
+        <td style="padding: 12px;"><input type="text" placeholder="Item Code" style="width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></td>
+        <td style="padding: 12px;"><input type="text" placeholder="Barcode" style="width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></td>
+        <td style="padding: 12px;">
+            <select style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: 100%;">
+                <option>Pcs</option><option>Meters</option><option>Kgs</option><option>Box</option>
+            </select>
+        </td>
+        <td style="padding: 12px;"><input type="text" placeholder="Description" style="width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></td>
+        <td style="padding: 12px; text-align: center;">
+            <button onclick="removeRow(this)" style="background: #d9534f; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">X</button>
+        </td>`;
 }
 
-function updateSerialNumbers() {
-    const rows = document.querySelectorAll("table tr");
-    for (let i = 1; i < rows.length; i++) {
-        if(rows[i].cells[0]) rows[i].cells[0].innerText = i;
-    }
-}
-
-// Export Table to Excel (CSV format)
+// 3. Export Logic
 function exportTableToExcel() {
     const table = document.querySelector("table");
     if (!table) return;
-
     let rows = Array.from(table.rows);
     let csvContent = rows.map(row => {
         const cols = Array.from(row.cells);
-        return cols.map(c => `"${c.innerText.replace(/\n/g, ' ')}"`).join(",");
+        return cols.map(c => {
+            let val = c.querySelector('input') ? c.querySelector('input').value : c.innerText;
+            return `"${val.replace(/\n/g, ' ')}"`;
+        }).join(",");
     }).join("\n");
 
     const blob = new Blob([csvContent], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.setAttribute('hidden', '');
-    a.setAttribute('href', url);
-    a.setAttribute('download', 'Production_Report.csv');
-    document.body.appendChild(a);
+    a.href = url;
+    a.download = 'ERP_Report.csv';
     a.click();
-    document.body.removeChild(a);
 }
 
 /*********************************
- * INITIALIZATION & PROTECTION
+ * INITIALIZATION
  *********************************/
 
 document.addEventListener("DOMContentLoaded", function () {
-    // 1. Display Current User
-    const userDisplay = document.getElementById("userDisplay");
-    if (userDisplay) {
-        userDisplay.innerText = "User: " + (localStorage.getItem("currentUser") || "Admin");
-    }
-
-    // 2. Access Control
+    // 1. Protection & User Display
     const path = window.location.pathname;
     const isLoggedIn = localStorage.getItem("loggedIn") === "true";
     const publicPages = ["login.html", "register.html"];
@@ -191,31 +208,29 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "login.html";
     }
 
-    // 3. Receipt Page Events
-    if (path.includes('receipt-prod')) {
-        const addBtn = document.querySelector('.btn-add');
-        const saveBtn = document.querySelector('.btn-save');
-
-        if (addBtn) addBtn.onclick = addReceiptRow;
-        if (saveBtn) {
-            saveBtn.onclick = () => {
-                alert("Receipt posted successfully! Inventory has been updated.");
-            };
-        }
+    const userDisplay = document.getElementById("userDisplay");
+    if (userDisplay) {
+        userDisplay.innerText = "User: " + (localStorage.getItem("currentUser") || "Admin");
     }
 
-    // 4. Report Page Events
-    if (path.includes('report')) {
-        const generateBtn = document.querySelector('.btn-save');
-        const exportBtn = document.querySelector('.btn-add');
+    // 2. Dynamic Button Routing
+    const addBtn = document.querySelector('.btn-add');
+    const saveBtn = document.querySelector('.btn-save');
 
-        if (generateBtn) {
-            generateBtn.addEventListener('click', () => {
-                alert("Generating report results...");
-            });
-        }
-        if (exportBtn) {
-            exportBtn.addEventListener('click', exportTableToExcel);
-        }
+    if (path.includes('receipt-prod')) {
+        if (addBtn) addBtn.onclick = addReceiptRow;
+        if (saveBtn) saveBtn.onclick = () => alert("Receipt posted successfully!");
+    } 
+    else if (path.includes('barcode')) {
+        if (addBtn) addBtn.onclick = addBarcodeRow;
+        if (saveBtn) saveBtn.onclick = () => alert("Barcodes saved successfully!");
+        
+        // Target the "Generate Barcode" button specifically
+        const genBtn = document.querySelector('.btn-save[style*="width: 150px"]');
+        if(genBtn) genBtn.onclick = () => alert("Barcode layout generated!");
+    }
+    else if (path.includes('report')) {
+        if (addBtn) addBtn.onclick = exportTableToExcel;
+        if (saveBtn) saveBtn.onclick = () => alert("Report generated!");
     }
 });

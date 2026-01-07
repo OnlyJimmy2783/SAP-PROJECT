@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ERP - Item Management</title>
+  <link rel="stylesheet" href="../assest/style.css"> 
+</head>
+<body>
+<div class="dashboard">
+  <aside class="sidebar" id="mySidebar">
+    <div class="sidebar-header">
+      <span>ERP Menu</span>
+      <span class="toggle-btn" style="cursor:pointer" onclick="toggleSidebar()">◀</span>
+    </div>
+    <ul class="module-list">
+      <li class="module-item" onclick="toggleSubMenu('inventoryMenu')">
+        <span class="module-icon">📦</span><span>Inventory</span>
+      </li>
+      <ul class="sub-module-list open" id="inventoryMenu">
+        <li onclick="navigate('item-master.html')">Item Master Data</li>
+        <li onclick="navigate('item-management.html')" style="background: #f0f7ff; color: #3a7bd5; font-weight: bold;">Item Management</li>
+      </ul>
+    </ul>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="nav-info">Inventory / Item Management (Stock Status)</div>
+      <div class="user-info" id="userDisplay">User: Admin</div>
+    </header>
+    
+    <div class="content">
+      <div class="form-card" style="border: 1px solid #3a7bd5;">
+        <div class="form-title">Stock Lookup</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Item Code</label>
+            <input type="text" id="mgmtItemCode" placeholder="Enter Item Code...">
+          </div>
+          <div class="form-group">
+            <label>Warehouse</label>
+            <select id="mgmtWhse" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <option value="All">All Warehouses</option>
+                <option value="Main">Main Warehouse</option>
+                <option value="RM">Raw Material Whse</option>
+                <option value="FG">Finished Goods Whse</option>
+            </select>
+          </div>
+          <div class="form-group" style="display:flex; align-items:flex-end;">
+             <button class="btn-save" style="margin:0; width:100%;">Check Status</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card" style="margin-top: 20px;">
+        <div class="form-title" style="font-size: 1.1rem;">Quantity Details</div>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label>On-Hand Quantity</label>
+            <input type="number" id="onHand" value="0" readonly style="background:#f9f9f9; font-weight:bold;">
+            <small style="color:#666;">(Physical stock in Whse)</small>
+          </div>
+
+          <div class="form-group">
+            <label>Committed Quantity</label>
+            <input type="number" id="committed" value="0" readonly style="background:#f9f9f9; color:#d9534f;">
+            <small style="color:#666;">(Reserved for Sales/Prod)</small>
+          </div>
+
+          <div class="form-group">
+            <label>Available Quantity</label>
+            <input type="number" id="available" value="0" readonly style="background:#e8f5e9; color:#2e7d32; font-weight:bold; border: 1px solid #2e7d32;">
+            <small style="color:#666;">(Net available for use)</small>
+          </div>
+        </div>
+
+        <div style="margin-top:20px; padding:15px; background:#fff9e6; border-left:4px solid #f0ad4e; font-size:0.9rem;">
+            <strong>Calculation Rule:</strong> Available Quantity = On-Hand Stock minus Committed Stock.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/app.js"></script>
+</body>
+</html>

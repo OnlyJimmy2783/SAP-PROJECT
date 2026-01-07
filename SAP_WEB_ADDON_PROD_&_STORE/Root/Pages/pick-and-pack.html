@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ERP - Pick and Pack</title>
+  <link rel="stylesheet" href="../assest/style.css"> 
+</head>
+<body>
+<div class="dashboard">
+  <aside class="sidebar" id="mySidebar">
+    <div class="sidebar-header">
+      <span>ERP Menu</span>
+      <span class="toggle-btn" style="cursor:pointer" onclick="toggleSidebar()">◀</span>
+    </div>
+    <ul class="module-list">
+      <li class="module-item" onclick="toggleSubMenu('inventoryMenu')">
+        <span class="module-icon">📦</span><span>Inventory</span>
+      </li>
+      <ul class="sub-module-list open" id="inventoryMenu">
+        <li onclick="navigate('item-master.html')">Item Master Data</li>
+        <li onclick="navigate('item-management.html')">Item Management</li>
+        <li onclick="navigate('pick-pack.html')" style="background: #f0f7ff; color: #3a7bd5; font-weight: bold;">Pick and Pack</li>
+      </ul>
+    </ul>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="nav-info">Inventory / Pick and Pack Manager</div>
+      <div class="user-info" id="userDisplay">User: Admin</div>
+    </header>
+    
+    <div class="content">
+      <div class="form-card" style="border: 1px solid #3a7bd5;">
+        <div class="form-title">Pick List Generation</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Pick List Number</label>
+            <input type="text" value="PL-2026-005" readonly style="background:#f9f9f9; font-weight:bold;">
+          </div>
+          <div class="form-group">
+            <label>Base Document Type</label>
+            <select style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <option>Sales Order</option>
+                <option>Production Order</option>
+                <option>Inventory Transfer Request</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Base Document No.</label>
+            <input type="text" placeholder="Search Document...">
+          </div>
+          <div class="form-group">
+            <label>Current Status</label>
+            <select style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-weight:bold; color:#3a7bd5;">
+                <option>Released</option>
+                <option>Partially Picked</option>
+                <option>Picked</option>
+                <option>Closed</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card" style="margin-top: 20px;">
+        <div class="form-title" style="font-size: 1.1rem;">Items to be Picked</div>
+        <div style="border: 1px solid #eee; border-radius: 4px; overflow: hidden;">
+           <table style="width: 100%; text-align: left; border-collapse: collapse;">
+             <tr style="background: #f8f9fa; border-bottom: 2px solid #ddd;">
+               <th style="padding: 12px;">Sr.</th>
+               <th style="padding: 12px;">Item Code</th>
+               <th style="padding: 12px;">Ordered Qty</th>
+               <th style="padding: 12px;">Picked Quantity</th>
+               <th style="padding: 12px;">Bin Location</th>
+               <th style="padding: 12px; text-align: center;">Action</th>
+             </tr>
+             <tr style="border-bottom: 1px solid #eee;">
+               <td style="padding: 12px;">1</td>
+               <td style="padding: 12px;"><input type="text" placeholder="Item Code" style="width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></td>
+               <td style="padding: 12px;"><input type="number" value="10" readonly style="width: 80px; padding: 8px; border:none; background:transparent;"></td>
+               <td style="padding: 12px;"><input type="number" placeholder="0" style="width: 100px; padding: 8px; border: 1px solid #3a7bd5; border-radius: 4px; background:#fff;"></td>
+               <td style="padding: 12px;"><input type="text" value="A1-S2-B4" readonly style="width: 90px; padding: 8px; border:none; color:#666;"></td>
+               <td style="padding: 12px; text-align: center;">
+                 <button class="btn-delete" style="background: #d9534f; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">X</button>
+               </td>
+             </tr>
+           </table>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn-add">Add Manual Item</button>
+          <button class="btn-save" style="background: #2ecc71;">Finalize Picking</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/app.js"></script>
+</body>
+</html>
