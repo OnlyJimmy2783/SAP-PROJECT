@@ -21,16 +21,28 @@
         <span class="module-icon">📦</span><span>Inventory</span>
       </li>
       <ul class="sub-module-list" id="inventoryMenu">
-        <li onclick="navigate('item-master.html')">Item Master Data</li>
-        <li onclick="navigate('packing-slip.html')">Packing Slip</li>
+        <li onclick="navigate('item-master-invt.html')">Item Master Data</li>
+        <li onclick="navigate('bar-codes.html')">Bar Codes</li> 
+        <li onclick="navigate('doc-print-invt.html')">Document Printing</li>
+        <li onclick="navigate('bin-location.html')">Bin location</li>
+        <li onclick="navigate('item-management.html')">Item Management</li>
+        <li onclick="navigate('inventory-transaction-invt.html')">Inventory Transaction</li>
+        <li onclick="navigate('price-list.html')">Price List</li>
+        <li onclick="navigate('pick-and-pack.html')">Pick and Pack</li>
+        <li onclick="navigate('inventory-report.html')">Inventory Reports</li>
       </ul>
 
       <li class="module-item" onclick="toggleSubMenu('prodMenu')">
         <span class="module-icon">🏭</span><span>Production</span>
       </li>
       <ul class="sub-module-list open" id="prodMenu">
-        <li onclick="navigate('prod-order.html')">Production Order</li>
         <li onclick="navigate('bom.html')" style="background: #f0f7ff; color: #3a7bd5; font-weight: bold;">Bill Of Materials</li>
+        <li onclick="navigate('prod-order.html')">Production Order</li>
+        <li onclick="navigate('issue-prod.html')">Issue from Production</li>
+        <li onclick="navigate('receipt-prod.html')">Receipt from Production</li>
+        <li onclick="navigate('procurement-prod.html')">Procurement Production Wizard</li>
+        <li onclick="navigate('cost-management-prod.html')">Cost Management for Production</li>
+        <li onclick="navigate('prod-reports.html')">Production Reports</li>
       </ul>
 
       <li class="module-item" onclick="logout()" style="background:#d9534f; border:none; margin-top:20px;">
@@ -41,7 +53,7 @@
 
   <div class="main">
     <header class="topbar">
-      <div class="nav-info">Home / Bill Of Materials</div>
+      <div class="nav-info">Home/ Modules / Production / Bill Of Materials</div>
       <div class="user-info" id="userDisplay">User: Admin</div>
     </header>
     
@@ -84,30 +96,60 @@
         <div class="form-title" style="font-size: 1.1rem;">Component Details</div>
         <div style="border: 1px solid #eee; border-radius: 4px; overflow: hidden;">
            <table style="width: 100%; text-align: left; border-collapse: collapse;">
-             <tr style="background: #f8f9fa; border-bottom: 2px solid #ddd;">
-               <th style="padding: 12px;">Sr.</th>
-               <th style="padding: 12px;">Component Item Code</th>
-               <th style="padding: 12px;">Item Name</th>
-               <th style="padding: 12px;">Component Quantity</th>
-               <th style="padding: 12px;">Warehouse</th>
-               <th style="padding: 12px; text-align: center;">Action</th>
-             </tr>
-             <tr style="border-bottom: 1px solid #eee;">
-               <td style="padding: 12px;">1</td>
-               <td style="padding: 12px;"><input type="text" placeholder="Item Code" style="width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></td>
-               <td style="padding: 12px;"><input type="text" placeholder="Item Name" style="width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></td>
-               <td style="padding: 12px;"><input type="number" placeholder="0" style="width: 80px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></td>
-               <td style="padding: 12px;">
-                    <select style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-                        <option>Raw Material Whse</option>
-                        <option>Main Whse</option>
-                    </select>
-               </td>
-               <td style="padding: 12px; text-align: center;">
-                 <button style="background: #d9534f; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">X</button>
-               </td>
-             </tr>
-           </table>
+  <tr style="background: #f8f9fa; border-bottom: 2px solid #ddd;">
+    <th style="padding: 12px;">Sr.</th>
+    <th style="padding: 12px;">Component Item Code</th>
+    <th style="padding: 12px;">Item Name</th>
+    <th style="padding: 12px;">Quantity</th>
+    <th style="padding: 12px;">Warehouse</th>
+    <th style="padding: 12px;">More Details</th>
+    <th style="padding: 12px; text-align: center;">Action</th>
+  </tr>
+
+  <tr style="border-bottom: 1px solid #eee;">
+    <td style="padding: 12px;">1</td>
+
+    <td style="padding: 12px;">
+      <input type="text" placeholder="Item Code" style="width: 90%; padding: 8px;">
+    </td>
+
+    <td style="padding: 12px;">
+      <input type="text" placeholder="Item Name" style="width: 90%; padding: 8px;">
+    </td>
+
+    <td style="padding: 12px;">
+      <input type="number" id="qty1" value="1" oninput="calculateTotal(1)"
+             style="width: 70px; padding: 8px;">
+    </td>
+
+    <td style="padding: 12px;">
+      <select style="width: 100%; padding: 8px;">
+        <option>Raw Material Whse</option>
+        <option>Main Whse</option>
+      </select>
+    </td>
+
+    <!-- MULTI SELECTION DROPDOWN -->
+    <td style="padding: 12px;">
+      <select multiple onchange="handleDetailsChange(1)"
+              style="width: 100%; padding: 8px; height: 90px;">
+        <option value="uom">UOM</option>
+        <option value="price">Unit Price</option>
+        <option value="total">Total</option>
+        <option value="batch">Batch No</option>
+        <option value="bin">Bin Location</option>
+      </select>
+
+      <!-- Hidden Detail Fields -->
+      <div id="details1" style="margin-top: 8px;"></div>
+    </td>
+
+    <td style="padding: 12px; text-align: center;">
+      <button style="background: #d9534f; color: #fff; border: none; padding: 6px 12px;">X</button>
+    </td>
+  </tr>
+</table>
+
         </div>
 
         <div class="btn-group">

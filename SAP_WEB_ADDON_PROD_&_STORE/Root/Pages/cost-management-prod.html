@@ -21,17 +21,28 @@
         <span class="module-icon">📦</span><span>Inventory</span>
       </li>
       <ul class="sub-module-list" id="inventoryMenu">
-        <li onclick="navigate('item-master.html')">Item Master Data</li>
-        <li onclick="navigate('packing-slip.html')">Packing Slip</li>
+        <li onclick="navigate('item-master-invt.html')">Item Master Data</li>
+        <li onclick="navigate('bar-codes.html')">Bar Codes</li> 
+        <li onclick="navigate('doc-print-invt.html')">Document Printing</li>
+        <li onclick="navigate('bin-location.html')">Bin location</li>
+        <li onclick="navigate('item-management.html')">Item Management</li>
+        <li onclick="navigate('inventory-transaction-invt.html')">Inventory Transaction</li>
+        <li onclick="navigate('price-list.html')">Price List</li>
+        <li onclick="navigate('pick-and-pack.html')">Pick and Pack</li>
+        <li onclick="navigate('inventory-report.html')">Inventory Reports</li>
       </ul>
 
       <li class="module-item" onclick="toggleSubMenu('prodMenu')">
         <span class="module-icon">🏭</span><span>Production</span>
       </li>
       <ul class="sub-module-list open" id="prodMenu">
+        <li onclick="navigate('bom.html')" style="background: #f0f7ff; color: #3a7bd5; font-weight: bold;">Bill Of Materials</li>
         <li onclick="navigate('prod-order.html')">Production Order</li>
-        <li onclick="navigate('bom.html')">Bill Of Materials</li>
-        <li onclick="navigate('std-cost.html')" style="background: #f0f7ff; color: #3a7bd5; font-weight: bold;">STD Cost Management</li>
+        <li onclick="navigate('issue-prod.html')">Issue from Production</li>
+        <li onclick="navigate('receipt-prod.html')">Receipt from Production</li>
+        <li onclick="navigate('procurement-prod.html')">Procurement Production Wizard</li>
+        <li onclick="navigate('cost-management-prod.html')">Cost Management for Production</li>
+        <li onclick="navigate('prod-reports.html')">Production Reports</li>
       </ul>
 
       <li class="module-item" onclick="logout()" style="background:#d9534f; border:none; margin-top:20px;">
@@ -42,7 +53,7 @@
 
   <div class="main">
     <header class="topbar">
-      <div class="nav-info">Home / Production STD Cost Management</div>
+      <div class="nav-info">Home / Modules / Production / Production STD Cost Management</div>
       <div class="user-info" id="userDisplay">User: Admin</div>
     </header>
     
