@@ -13,7 +13,8 @@ function login() {
     const pass = document.getElementById("password")?.value;
 
     const users = JSON.parse(localStorage.getItem("users")) || [
-        { u: "admin", p: "1234" }
+        { u: "admin", p: "1234" },
+        { u: "jimit", p: "060804" }
     ];
 
     const validUser = users.find(u => u.u === user && u.p === pass);
@@ -71,23 +72,19 @@ function logout() {
 function toggleSidebar() {
     const sidebar = document.getElementById("mySidebar");
     const btn = document.querySelector(".toggle-btn");
-    const mainContent = document.querySelector(".main");
 
     if (!sidebar) return;
 
     sidebar.classList.toggle("collapsed");
 
     if (sidebar.classList.contains("collapsed")) {
-        sidebar.style.width = "60px";
-        if (mainContent) mainContent.style.marginLeft = "60px";
-        if (btn) btn.innerHTML = "▶";
+        btn.innerHTML = "▶";
         closeAllSubMenus();
     } else {
-        sidebar.style.width = "250px";
-        if (mainContent) mainContent.style.marginLeft = "250px";
-        if (btn) btn.innerHTML = "◀";
+        btn.innerHTML = "◀";
     }
 }
+
 
 function toggleSubMenu(menuId) {
     const menu = document.getElementById(menuId);
@@ -308,5 +305,19 @@ function calculateTotal(row) {
   }
 }
 
-//
+// popup menu for BOM chooser
+
+function openBomChooser() {
+    document.getElementById("bomModal").style.display = "block";
+}
+
+function closeBomChooser() {
+    document.getElementById("bomModal").style.display = "none";
+}
+
+function selectBom(bomNo) {
+    document.getElementById("productionNo").value = bomNo;
+    closeBomChooser();
+}
+
 

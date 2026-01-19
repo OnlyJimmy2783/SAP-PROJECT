@@ -266,3 +266,80 @@ button:active { transform: scale(0.98); }
 .btn-save, .inv-btn-print, .btn-post-issue { background: var(--primary-blue); color: white; }
 .btn-delete-row, .inv-btn-delete { background: var(--danger-red); color: white; }
 .inv-btn-success { background: var(--success-green); color: white; }
+
+/* Production No chooser input */
+.input-with-btn {
+    position: relative;
+    display: flex;
+}
+
+.input-with-btn input {
+    width: 100%;
+    padding-right: 36px;
+}
+
+.chooser-btn {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 26px;
+    height: 26px;
+    border: 1px solid #ccc;
+    background: #f2f2f2;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 18px;
+}
+
+/* Popup Modal */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 9999;
+}
+
+.modal-box {
+    background: #fff;
+    width: 600px;
+    margin: 80px auto;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: #3a7bd5;
+    color: white;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.modal-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.modal-table th,
+.modal-table td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-table tr:hover {
+    background: #f0f7ff;
+    cursor: pointer;
+}
+
+
+
